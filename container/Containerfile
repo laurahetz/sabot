@@ -1,0 +1,20 @@
+FROM docker.io/golang:1.21.3-bullseye as build
+
+WORKDIR /root/go/src/sabot
+ADD ./ ./
+
+RUN go get -d ./...
+
+RUN go build /root/go/src/sabot/lib/database/dbgen/dbgen.go
+RUN go build /root/go/src/sabot/bootstrapping/benchmark/benchmark.go
+RUN go build /root/go/src/sabot/bootstrapping/server/server.go
+
+FROM docker.io/debian:bullseye
+WORKDIR /app
+COPY --from=build /root/go/src/sabot/dbgen /app/dbgen
+COPY --from=build /root/go/src/sabot/benchmark /app/benchmark
+COPY --from=build /root/go/src/sabot/server /app/server
+COPY --from=build /root/go/src/sabot/cert/* /app/cert/
+COPY --from=build /root/go/src/sabot/app/benchmarks/configs.json /app/benchmarks/configs.json
+
+

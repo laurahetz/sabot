@@ -1,0 +1,33 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+*.csv
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+
+*.pem
+*.srl
+
+# exclude proto generated files
+#proto/bootstrapping/*
+#*.pb.go
+.vscode/
+.vscode/launch.json
+*.db
+*.ipir
+*.kwpir
+.DS_Store
+app/db/*

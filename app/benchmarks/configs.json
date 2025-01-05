@@ -1,0 +1,455 @@
+{
+    "Addr1": "localhost:50051",
+    "Addr2": "localhost:50052",
+    "Configs": [
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_false",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_false",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_false",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_false",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_false",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_false",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_false",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_false",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_false",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_false",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_false",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_true",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_true",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_10_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_true",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_true",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_12_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_true",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_true",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_14_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_true",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_true",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_16_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": true,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_true",
+            "RateR": 5,
+            "RateS": 5,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_true",
+            "RateR": 10,
+            "RateS": 10,
+            "MultiClient": false,
+            "NumThreads": 1,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        },
+        {
+            "Idx": 0,
+            "Dbfile": "/app/db/db_18_32_32_true",
+            "RateR": 1,
+            "RateS": 1,
+            "MultiClient": true,
+            "NumThreads": 50,
+            "ResetServer": false,
+            "Repetitions": 50,
+            "DBType": 0
+        }
+    ]
+}
