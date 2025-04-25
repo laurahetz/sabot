@@ -1,0 +1,91 @@
+
+import pandas as pd
+import numpy as np
+import sys
+
+def get_bw_tex(df, sysname):
+    out = ""
+    unique_rates = df['rate'].unique()
+    for rate in unique_rates:
+        # Filter rows for the current rate
+        filtered_df = df[df['rate'] == rate]
+
+        # Concatenate 'BW_Total_Norm' values for all 'db_size' in ascending order
+        bw_norm_values = [
+            f"\\qty{{{row['BW_Total_Norm']:.2f}}}{{\\kibi\\byte}}"
+            for _, row in filtered_df.sort_values('db_size').iterrows()
+        ]
+        concatenated_string = " & ".join(bw_norm_values)
+
+        # Write the string to the file
+        out += f"\\{sysname}{{}} ({rate}) & {concatenated_string} \\\\\n"
+    return out
+
+def process_bw_csvs(input_file, output_file):
+    # Read the CSV file with headers
+    df_bw_noauth = pd.read_csv(f'{input_file}_BW_NoAuth.csv')
+    df_bw_auth = pd.read_csv(f'{input_file}_BW_Auth.csv')
+
+    out_noauth = get_bw_tex(df_bw_noauth, "hprot")
+    out_auth = get_bw_tex(df_bw_auth, "mprot")
+
+    # Write the BW result to a text file (tab-separated for clarity)
+    # Open the output file and manually format the lines
+    with open(output_file, 'w') as f:
+            # Write the string to the file
+            f.write(f"{out_noauth}\\addlinespace\n{out_auth}")
+
+
+def process_rt_csvs(input_file, output_file):
+    # Read the CSV file with headers
+    df_noauth = pd.read_csv(f'{input_file}_RT_Multi_NoAuth.csv')
+    df_auth = pd.read_csv(f'{input_file}_RT_Multi_Auth.csv')
+
+    # Save the DataFrames in an array
+    sysnames = ['hprot', 'mprot']
+
+    unique_db_sizes = sorted(df_auth['db_size'].unique())
+    unique_rates = sorted(df_auth['rate'].unique())
+
+    with open(output_file, 'w') as f:
+            # Write the string to the file
+            header = "& & S-Retrieval & S-Notify & R-GetNotify & R-Retrieval & R-Notify & S-GetNotify & \\textbf{{Total}}\\\\\n\\midrule\n"
+            f.write(f"{header}")
+
+            for db_size in unique_db_sizes:
+                out = f"\\multirow{{6}}{{*}}{{\\(2^{{{int(np.log2(db_size))}}}\\)}}"
+                for rate in unique_rates:
+                    # Filter the DataFrames for the current db_size and rate
+                    filtered_noauth = df_noauth[(df_noauth['db_size'] == db_size) & (df_noauth['rate'] == rate)]
+                    filtered_auth = df_auth[(df_auth['db_size'] == db_size) & (df_auth['rate'] == rate)]
+  
+                    dataframes = [filtered_noauth, filtered_auth]
+
+                    send_notify = (filtered_noauth['RT_SendNotify'].iloc[0]+filtered_auth['RT_SendNotify'].iloc[0])/2
+                    recv_getnotify = (filtered_noauth['RT_RecvGetNotified'].iloc[0]+filtered_auth['RT_RecvGetNotified'].iloc[0])/2
+                    send_not_string = [f"\\multirow{{2}}{{*}}{{\\qty{{{send_notify:.2f}}}{{\\second}}}} & \\multirow{{2}}{{*}}{{\\qty{{{recv_getnotify:.2f}}}{{\\second}}}}", " & "]
+
+                    recv_notify = (filtered_noauth['RT_RecvNotify'].iloc[0]+filtered_auth['RT_RecvNotify'].iloc[0])/2
+                    send_getnotify = (filtered_noauth['RT_SendGetNotified'].iloc[0]+filtered_auth['RT_SendGetNotified'].iloc[0])/2
+                    recv_not_string = [f"\\multirow{{2}}{{*}}{{\\qty{{{recv_notify:.2f}}}{{\\second}}}} & \\multirow{{2}}{{*}}{{\\qty{{{send_getnotify:.2f}}}{{\\second}}}}", " & "]
+
+                    for sysname, dataframe, send_str, recv_str in zip(sysnames, dataframes, send_not_string, recv_not_string):
+                        rt_total = dataframe['RT_SendPIR'].iloc[0] + dataframe['RT_RecvPIR'].iloc[0] + send_notify + recv_notify
+                        out += (
+                            f" & \\{sysname}{{}} ({rate}) & "
+                            f"\\qty{{{dataframe['RT_SendPIR'].iloc[0]:.2f}}}{{\\second}} & {send_str} & "
+                            f"\\qty{{{dataframe['RT_RecvPIR'].iloc[0]:.2f}}}{{\\second}} & {recv_str} & "
+                            f"\\textbf{{ \\qty{{{rt_total:.2f}}}{{\\second}} }}\\\\\n"
+                        )
+                    # if rate != unique_rates[-1]:
+                    #     out += "\\addlinespace\n"
+                f.write(f"{out}\\midrule\n")
+    
+            
+# Example usage: python sum_columns_to_txt.py input output
+if __name__ == "__main__":
+   
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    process_bw_csvs(input_file, f"{output_file}_bw.tex")
+    process_rt_csvs(input_file, f"{output_file}_rt.tex")

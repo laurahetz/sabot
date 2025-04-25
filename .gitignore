@@ -31,3 +31,5 @@ go.work
 *.kwpir
 .DS_Store
 app/db/*
+
+*.tex
