@@ -110,7 +110,7 @@ print("EXPERIMENT 3: Computation / No Auth / All Values S")
 tmp_frame = frame.loc[(frame['malicious'] == False) & (frame['multi_client'] == True)]
 r_frame = tmp_frame[['EXPID', 'db_size', 'rate', 'RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']].groupby(['EXPID']).mean().sort_values('db_size')
 columns_to_divide = ['RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']
-r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
+# r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
 format(r_frame)
 print(r_frame)
 print("\n")
@@ -121,7 +121,7 @@ print("EXPERIMENT 3: Computation / Yes Auth / All Values S")
 tmp_frame = frame.loc[(frame['malicious'] == True) & (frame['multi_client'] == True)]
 r_frame = tmp_frame[['EXPID', 'db_size', 'rate', 'RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']].groupby(['EXPID']).mean().sort_values('db_size')
 columns_to_divide = ['RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']
-r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
+# r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
 format(r_frame)
 print(r_frame)
 print("\n")
@@ -132,7 +132,7 @@ print("EXPERIMENT 4: Computation / No Auth / All Values S")
 tmp_frame = frame.loc[(frame['malicious'] == False) & (frame['multi_client'] == False) ]
 r_frame = tmp_frame[['EXPID', 'db_size', 'rate', 'RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']].groupby(['EXPID']).mean().sort_values('db_size')
 columns_to_divide = ['RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']
-r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
+# r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
 format(r_frame)
 print(r_frame)
 print("\n")
@@ -143,7 +143,7 @@ print("EXPERIMENT 4: Computation / Yes Auth / All Values S")
 tmp_frame = frame.loc[(frame['malicious'] == True) & (frame['multi_client'] == False)]
 r_frame = tmp_frame[['EXPID', 'db_size', 'rate', 'RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']].groupby(['EXPID']).mean().sort_values('db_size')
 columns_to_divide = ['RT_SendPIR', 'RT_SendNotify', 'RT_RecvGetNotified', 'RT_RecvPIR', 'RT_RecvNotify', 'RT_SendGetNotified', 'RT_Total']
-r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
+# r_frame[columns_to_divide] = r_frame[columns_to_divide].div(r_frame['rate'], axis=0)
 format(r_frame)
 print(r_frame)
 print("\n")

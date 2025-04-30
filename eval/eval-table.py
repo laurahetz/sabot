@@ -54,29 +54,36 @@ def process_rt_csvs(input_file, output_file):
 
             for db_size in unique_db_sizes:
                 out = f"\\multirow{{6}}{{*}}{{\\(2^{{{int(np.log2(db_size))}}}\\)}}"
+
+                rate_filtered_noauth = df_noauth[(df_noauth['db_size'] == db_size)]
+                rate_filtered_auth = df_auth[(df_auth['db_size'] == db_size)]
+
+                send_notify = (rate_filtered_noauth['RT_SendNotify'].sum() + rate_filtered_auth['RT_SendNotify'].sum())/6
+                recv_getnotify = (rate_filtered_noauth['RT_RecvGetNotified'].sum() + rate_filtered_auth['RT_RecvGetNotified'].sum())/6
+                recv_notify = (rate_filtered_noauth['RT_RecvNotify'].sum() + rate_filtered_auth['RT_RecvNotify'].sum())/6
+                send_getnotify = (rate_filtered_noauth['RT_SendGetNotified'].sum() + rate_filtered_auth['RT_SendGetNotified'].sum())/6
+
+                send_not_string = [f"\\multirow{{6}}{{*}}{{\\qty{{{send_notify:.2f}}}{{\\second}}}} & \\multirow{{6}}{{*}}{{\\qty{{{recv_getnotify:.2f}}}{{\\second}}}}",
+                                    " & "," & "," & "," & "," & ",]
+                recv_not_string = [f"\\multirow{{6}}{{*}}{{\\qty{{{recv_notify:.2f}}}{{\\second}}}} & \\multirow{{6}}{{*}}{{\\qty{{{send_getnotify:.2f}}}{{\\second}}}}",
+                                   " & "," & "," & "," & "," & ",]
+                ctr = 0
                 for rate in unique_rates:
                     # Filter the DataFrames for the current db_size and rate
                     filtered_noauth = df_noauth[(df_noauth['db_size'] == db_size) & (df_noauth['rate'] == rate)]
                     filtered_auth = df_auth[(df_auth['db_size'] == db_size) & (df_auth['rate'] == rate)]
   
                     dataframes = [filtered_noauth, filtered_auth]
-
-                    send_notify = (filtered_noauth['RT_SendNotify'].iloc[0]+filtered_auth['RT_SendNotify'].iloc[0])/2
-                    recv_getnotify = (filtered_noauth['RT_RecvGetNotified'].iloc[0]+filtered_auth['RT_RecvGetNotified'].iloc[0])/2
-                    send_not_string = [f"\\multirow{{2}}{{*}}{{\\qty{{{send_notify:.2f}}}{{\\second}}}} & \\multirow{{2}}{{*}}{{\\qty{{{recv_getnotify:.2f}}}{{\\second}}}}", " & "]
-
-                    recv_notify = (filtered_noauth['RT_RecvNotify'].iloc[0]+filtered_auth['RT_RecvNotify'].iloc[0])/2
-                    send_getnotify = (filtered_noauth['RT_SendGetNotified'].iloc[0]+filtered_auth['RT_SendGetNotified'].iloc[0])/2
-                    recv_not_string = [f"\\multirow{{2}}{{*}}{{\\qty{{{recv_notify:.2f}}}{{\\second}}}} & \\multirow{{2}}{{*}}{{\\qty{{{send_getnotify:.2f}}}{{\\second}}}}", " & "]
-
-                    for sysname, dataframe, send_str, recv_str in zip(sysnames, dataframes, send_not_string, recv_not_string):
+                    
+                    for sysname, dataframe in zip(sysnames, dataframes):
                         rt_total = dataframe['RT_SendPIR'].iloc[0] + dataframe['RT_RecvPIR'].iloc[0] + send_notify + recv_notify
                         out += (
                             f" & \\{sysname}{{}} ({rate}) & "
-                            f"\\qty{{{dataframe['RT_SendPIR'].iloc[0]:.2f}}}{{\\second}} & {send_str} & "
-                            f"\\qty{{{dataframe['RT_RecvPIR'].iloc[0]:.2f}}}{{\\second}} & {recv_str} & "
+                            f"\\qty{{{dataframe['RT_SendPIR'].iloc[0]:.2f}}}{{\\second}} & {send_not_string[ctr]} & "
+                            f"\\qty{{{dataframe['RT_RecvPIR'].iloc[0]:.2f}}}{{\\second}} & {recv_not_string[ctr]} & "
                             f"\\textbf{{ \\qty{{{rt_total:.2f}}}{{\\second}} }}\\\\\n"
                         )
+                        ctr += 1
                     # if rate != unique_rates[-1]:
                     #     out += "\\addlinespace\n"
                 f.write(f"{out}\\midrule\n")
