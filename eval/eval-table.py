@@ -49,7 +49,7 @@ def process_rt_csvs(input_file, output_file):
 
     with open(output_file, 'w') as f:
             # Write the string to the file
-            header = "& & S-Retrieval & S-Notify & R-GetNotify & R-Retrieval & R-Notify & S-GetNotify & \\textbf{{Total}}\\\\\n\\midrule\n"
+            header = "& & Rate & S-Retrieval & S-Notify & R-GetNotify & R-Retrieval & R-Notify & S-GetNotify & \\textbf{{Total}}\\\\\n\\midrule\n"
             f.write(f"{header}")
 
             for db_size in unique_db_sizes:
@@ -78,7 +78,7 @@ def process_rt_csvs(input_file, output_file):
                     for sysname, dataframe in zip(sysnames, dataframes):
                         rt_total = dataframe['RT_SendPIR'].iloc[0] + dataframe['RT_RecvPIR'].iloc[0] + send_notify + recv_notify
                         out += (
-                            f" & \\{sysname}{{}} ({rate}) & "
+                            f" & \\{sysname}{{}} & {rate} & "
                             f"\\qty{{{dataframe['RT_SendPIR'].iloc[0]:.2f}}}{{\\second}} & {send_not_string[ctr]} & "
                             f"\\qty{{{dataframe['RT_RecvPIR'].iloc[0]:.2f}}}{{\\second}} & {recv_not_string[ctr]} & "
                             f"\\textbf{{ \\qty{{{rt_total:.2f}}}{{\\second}} }}\\\\\n"
