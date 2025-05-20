@@ -15,6 +15,6 @@ COPY --from=build /root/go/src/sabot/dbgen /app/dbgen
 COPY --from=build /root/go/src/sabot/benchmark /app/benchmark
 COPY --from=build /root/go/src/sabot/server /app/server
 COPY --from=build /root/go/src/sabot/cert/* /app/cert/
-COPY --from=build /root/go/src/sabot/app/benchmarks/configs.json /app/benchmarks/configs.json
+#COPY --from=build /root/go/src/sabot/app/benchmarks/configs.json /app/benchmarks/configs.json
 
 
