@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Read input 
-# IP="USER INPUT"
-read -p "IP Address: " IP
+#read -p "IP Address: " IP
 read -p "Num. threads for multi client exeriment: " THREADS
 #read -p "Config File Name (saved in $PWD/app/benchmarks/<NAME>.json) : " NAME
 # Can be "F" = full benchmarks, "S" = small DB size benchmarks with low number of repetitions
 read -p 'Which benchmark configs to create "f" (full) or "s" (small for testing): ' BENCH
 
 #THREADS="10"
+IP="0.0.0.0"
 NAME="configs.json"
 OUTPATH=$PWD/app/benchmarks/$NAME
 DBPATH=/app/db/
@@ -21,7 +21,7 @@ if [ "$BENCH" = "f" ]; then
     REP="16"
 elif [ "$BENCH" = "s" ]; then
     RATEs="1 5"
-    DBEXPs="10 12 14"
+    DBEXPs="10 12 14 16"
     REP="2"
 else
     echo 'Please choose valid benchmarking set "f" (full) or "s" (small for tests)'
@@ -30,7 +30,7 @@ fi
 
 out='{'$'\r'
 out+='"Addr1": "'$IP':50051",'$'\r'
-out+='"Addr2": "'$IP':50051",'$'\r'
+out+='"Addr2": "'$IP':50052",'$'\r'
 out+='"Configs": ['$'\r'
 
 first=true
@@ -52,7 +52,7 @@ for dbexp in $DBEXPs; do
                 fi
                     out+='{'$'\r'
                     out+='"Idx": 0,'$'\r'\
-                    out+='"Dbfile": "'"$DBPATH"'db_'"$dbexp"'_32_32_'"$auth"'.json",'$'\r'
+                    out+='"Dbfile": "'"$DBPATH"'db_'"$dbexp"'_32_32_'"$auth"'",'$'\r'
                     out+='"RateR": '"$rate"','$'\r'
                     out+='"RateS": '"$rate"','$'\r'
                     out+='"MultiClient": '"$multi"','$'\r'

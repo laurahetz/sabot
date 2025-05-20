@@ -74,7 +74,6 @@ The benchmarking suite takes as input a `.json` file containing the descriptions
 
 The script `cmd/config-gen.sh` helps with the creation of this config file saved as `./app/benchmarks/configs.json`.
 It asks (interactively) for the following inputs:
-  - **IP address** of the machine on which the benchmarks will be run. This is needed for the GRPC connections between the containers.  
   - **Number of threads** to use (per server) for experiments that simulate all clients.
   - **Size of benchmark suite** to create:
     - `f`: full test suite used in our paper. Please note that the hardware (memory) requirements and runtime are higher for these benchmarks.
@@ -141,11 +140,6 @@ Example for the small benchmarking suite:
 python eval/eval.py ./app/benchmarks/results.csv result 2
 python eval/eval-table.py result result
 ```
-
-### Result Description
-
-<TODO> explain result description
-
 
 ### Helpful Container Commands
 
