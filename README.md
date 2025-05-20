@@ -72,12 +72,11 @@ To change the database parameters and the output path modify `./cmd/db-gen.sh`.
 
 The benchmarking suite takes as input a `.json` file containing the descriptions of all benchmarks to run.
 
-The script `cmd/config-gen.sh` helps with the creation of this config file saved as `./app/benchmarks/configs.json`.
-It asks (interactively) for the following inputs:
-  - **Number of threads** to use (per server) for experiments that simulate all clients.
-  - **Size of benchmark suite** to create:
-    - `f`: full test suite used in our paper. Please note that the hardware (memory) requirements and runtime are higher for these benchmarks.
-    - `s`: small test suite suitable. The parameters are chosen to allow testing of the code on commodity hardware and in less time compared to the full benchmarks.
+The script `cmd/config-gen.sh` helps with the creation of config files for different purposes:
+  - Full set of benchmarks: `app/benchmarks/configs_full.json` contains all benchmark configurations to run the experiments described in our paper. 
+  - Small set of benchmarks: `app/benchmarks/configs_small.json` contains a reduced set of benchmark configurations to run experiments in shorter time and on hardware with less memory.
+  - Test set of benchmarks: `app/benchmarks/configs_test.json` contains basic test configurations.
+
 
 ```shell
 ./cmd/config-gen.sh
@@ -88,13 +87,12 @@ It asks (interactively) for the following inputs:
 
 The protocol benchmarks have 3 components: 2 servers and 1 benchmark driver. 
 The benchmarking suite allows running a series of benchmarks, initiated from the client side.
-It takes as input a `config.json` file that specidies the benchmarks to run.
+It takes as input a JSON file that specidies the benchmarks to run.
 
-
-1. Ensure `./app/benchmarks/configs.json` contains the desired benchmarks (For more details see [the previous section](#generate-benchmark-configurations) and `benchmarks/README.md`).
-3. Run
+1. Ensure `./app/benchmarks/` contains the desired benchmarks (For more details see [the previous section](#generate-benchmark-configurations) and `benchmarks/README.md`).
+2. Run 
 ```shell
-make run
+make run-<full or small or test>
 ```
 to start the server components (as a background service), followed by the benchmark driver.
 Please note (when not using the make command), that the server components need to be up and running before the benchmark driver can be started.
