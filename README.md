@@ -37,6 +37,7 @@ While the following commands use Podman, a container orchestration software, com
 
 - Podman (or an equivalent container orchestration software, e.g., Docker)
 - Make (optional as commands from the `Makefile` can be called directly)
+- OpenSSL (tested with 3.5.0)
 
 Building our prototype (inside the container) requires
 - Golang 1.21.3
@@ -90,10 +91,11 @@ The benchmarking suite allows running a series of benchmarks, initiated from the
 It takes as input a JSON file that specidies the benchmarks to run.
 
 1. Ensure `./app/benchmarks/` contains the desired benchmarks (For more details see [the previous section](#generate-benchmark-configurations) and `benchmarks/README.md`).
-2. Run 
-```shell
-make run-<full or small or test>
-```
+2. Run the Make command for the according benchmark size (`make run-full`, `make run-small`, `make run-test`)
+  ```shell
+  # For the small benchmark set run
+  make run-small
+  ```
 to start the server components (as a background service), followed by the benchmark driver.
 Please note (when not using the make command), that the server components need to be up and running before the benchmark driver can be started.
 
@@ -138,6 +140,34 @@ Example for the small benchmarking suite:
 python eval/eval.py ./app/benchmarks/results.csv result 2
 python eval/eval-table.py result result
 ```
+
+### Troubleshooting 
+
+**Check Container Logs**
+
+If anything does not work as expected, check the logs of the container(s) for errors with (see [Helpful Container Commands](helpful-container-commands)).
+For the server container with name `s0` use the command `podman logs -f s0`. Use the names `s1, bench` for the other server and client container respectively.
+
+
+**Container name in use**
+
+After running benchmarks please note that the containers need to manually be shut off and removed.
+Use the command `make rm` to remove the containers created for benchmarking.
+All benchmark executions use the same container names, so no new containers can be started if previous ones have not been removed and the following error message will show: 
+```shell
+Error: creating container storage: the container name "s0" is already in use by <some id>. You have to remove that container to be able to reuse that name: that name is already in use, or use --replace to instruct Podman to do so.
+```
+
+**File Write Permissions**
+
+When testing on Fedora Server, we ran into issues with file permissions during DB generation:
+```shell
+error reading db file:open /app/db/db_10_32_32_false.ipir: permission denied
+```
+These issues can be resolved by disabling SELinux using the command `sudo setenforce 0`. However, please be aware of the security implications of this change.
+
+
+
 
 ### Helpful Container Commands
 
