@@ -35,7 +35,8 @@ This repo includes a containerized build and run environment.
 The provided Makefile contains all required commands.
 While the following commands use Podman, a container orchestration software, compatible software, e.g. Docker, can be used instead.
 
-- Podman (or an equivalent container orchestration software, e.g., Docker)
+- Podman 
+  - An equivalent container orchestration software, e.g., Docker, can be used, but for this, the commands in `Makefile` need to be adapted accordingly
 - Make (optional as commands from the `Makefile` can be called directly)
 - OpenSSL (tested with 3.5.0)
 
@@ -73,11 +74,12 @@ To change the database parameters and the output path modify `./cmd/db-gen.sh`.
 
 The benchmarking suite takes as input a `.json` file containing the descriptions of all benchmarks to run.
 
-The script `cmd/config-gen.sh` helps with the creation of config files for different purposes:
+The script `cmd/config-gen.sh` helps with the creation of config files for different purposes.
+It takes as interactive input the number of threads the simultated multi-client benchmarks should run on. Set this based on your available hardware.
+It outputs the config files listed below
   - Full set of benchmarks: `app/benchmarks/configs_full.json` contains all benchmark configurations to run the experiments described in our paper. 
   - Small set of benchmarks: `app/benchmarks/configs_small.json` contains a reduced set of benchmark configurations to run experiments in shorter time and on hardware with less memory.
   - Test set of benchmarks: `app/benchmarks/configs_test.json` contains basic test configurations.
-
 
 ```shell
 ./cmd/config-gen.sh
@@ -98,6 +100,12 @@ It takes as input a JSON file that specidies the benchmarks to run.
   ```
 to start the server components (as a background service), followed by the benchmark driver.
 Please note (when not using the make command), that the server components need to be up and running before the benchmark driver can be started.
+3. **Wait for the benchmarks to finish**. The client container will stop running once it finished the calculations or if an error occured. Check the container logs for this `podman logs -f bench`. 
+
+4. Once the client container stopped, remove all benchmarking containers using the command 
+```shell
+make rm
+```
 
 ### 5. Cleanup
 
