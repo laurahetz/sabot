@@ -28,7 +28,7 @@ for BENCH in $BENCHs; do
     elif [ "$BENCH" = "s" ]; then
         RATEs="1 5"
         DBEXPs="10 12 14 16"
-        REP="2"
+        REP="5"
         NAME="configs_small.json"
     elif [ "$BENCH" = "t" ]; then
         RATEs="1"
@@ -41,8 +41,8 @@ for BENCH in $BENCHs; do
     fi
 
     out='{'$'\r'
-    out+='"Addr1": "'$IP':50051",'$'\r'
-    out+='"Addr2": "'$IP':50052",'$'\r'
+    out+='"Addr1": "'"$IP"':50051",'$'\r'
+    out+='"Addr2": "'"$IP"':50052",'$'\r'
     out+='"Configs": ['$'\r'
 
     first=true
@@ -83,6 +83,6 @@ for BENCH in $BENCHs; do
     done
 
     out+=']'$'\r''}'
-    OUTPATH=$PWD/app/benchmarks/$NAME
-    echo $out > $OUTPATH
+    OUTPATH="$PWD"/app/benchmarks/"$NAME"
+    echo "$out" > "$OUTPATH"
 done

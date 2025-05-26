@@ -145,7 +145,7 @@ python eval/eval-table.py <input file prefix> <output file prefix>
 
 Example for the small benchmarking suite:
 ```shell
-python eval/eval.py ./app/benchmarks/results.csv result 2
+python eval/eval.py ./app/benchmarks/results.csv result 5
 python eval/eval-table.py result result
 ```
 

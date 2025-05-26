@@ -22,6 +22,17 @@ def get_bw_tex(df, sysname):
     return out
 
 def process_bw_csvs(input_file, output_file):
+
+    header =  "\\scalebox{0.8}{%\n"
+    header += "\\begin{tabularx}{0.65\\textwidth}{lrrrrr}\\\\\\toprule\n"
+    header += "& \\multicolumn{5}{c}{Number of clients}\\\\\n"
+    header += "& $2^{10}$ & $2^{12}$ & $2^{14}$ & $2^{16}$ & $2^{18}$\\\\\\midrule\n"
+
+    relatedwork = "Alpenhorn       & \\qty{7.08}{\\mebi\\byte} & \\qty{7.17}{\\mebi\\byte}& \\qty{7.53}{\\mebi\\byte}& \\qty{8.97}{\\mebi\\byte}& \\qty{14.10}{\\mebi\\byte}\\\\\\addlinespace\n"
+    relatedwork += "Pudding w/o Nym & \\qty{125.57}{\\kibi\\byte} & \\qty{125.57}{\\kibi\\byte}         & \\qty{125.57}{\\kibi\\byte}         & \\qty{125.57}{\\kibi\\byte}         &\\qty{125.57}{\\kibi\\byte}\\\\\n"
+    relatedwork += "Pudding w/ Nym  & \\qty{6.99}{\\mebi\\byte} & \\qty{6.99}{\\mebi\\byte} & \\qty{6.99}{\\mebi\\byte} & \\qty{6.99}{\\mebi\\byte}      & \\qty{6.99}{\\mebi\\byte}\\\\\\bottomrule\n"
+    relatedwork += "\\end{tabularx}\n}"
+
     # Read the CSV file with headers
     df_bw_noauth = pd.read_csv(f'{input_file}_BW_NoAuth.csv')
     df_bw_auth = pd.read_csv(f'{input_file}_BW_Auth.csv')
@@ -32,8 +43,10 @@ def process_bw_csvs(input_file, output_file):
     # Write the BW result to a text file (tab-separated for clarity)
     # Open the output file and manually format the lines
     with open(output_file, 'w') as f:
+            f.write(f"{header}")
             # Write the string to the file
-            f.write(f"{out_noauth}\\addlinespace\n{out_auth}")
+            f.write(f"{out_noauth}\\addlinespace\n{out_auth}\\addlinespace\n")
+            f.write(f"{relatedwork}")
 
 
 def process_rt_csvs(input_file, output_file):
@@ -49,11 +62,14 @@ def process_rt_csvs(input_file, output_file):
 
     with open(output_file, 'w') as f:
             # Write the string to the file
-            header = "& & Rate & S-Retrieval & S-Notify & R-GetNotify & R-Retrieval & R-Notify & S-GetNotify & \\textbf{{Total}}\\\\\n\\midrule\n"
+            header = "\\scalebox{0.8}{%\n"
+            header += "\\begin{tabularx}{0.86\\textwidth}{rlcrrrrrrr}\\toprule"
+            header += "& & Rate & S-Retrieval & S-Notify & R-GetNotify & R-Retrieval & R-Notify & S-GetNotify & \\textbf{Total}\\\\\n\\midrule\n"
             f.write(f"{header}")
 
             for db_size in unique_db_sizes:
-                out = f"\\multirow{{6}}{{*}}{{\\(2^{{{int(np.log2(db_size))}}}\\)}}"
+                numrows = len(unique_rates)*2
+                out = f"\\multirow{{{numrows}}}{{*}}{{$2^{{{int(np.log2(db_size))}}}$}}"
 
                 rate_filtered_noauth = df_noauth[(df_noauth['db_size'] == db_size)]
                 rate_filtered_auth = df_auth[(df_auth['db_size'] == db_size)]
@@ -63,9 +79,9 @@ def process_rt_csvs(input_file, output_file):
                 recv_notify = (rate_filtered_noauth['RT_RecvNotify'].sum() + rate_filtered_auth['RT_RecvNotify'].sum())/6
                 send_getnotify = (rate_filtered_noauth['RT_SendGetNotified'].sum() + rate_filtered_auth['RT_SendGetNotified'].sum())/6
 
-                send_not_string = [f"\\multirow{{6}}{{*}}{{\\qty{{{send_notify:.2f}}}{{\\second}}}} & \\multirow{{6}}{{*}}{{\\qty{{{recv_getnotify:.2f}}}{{\\second}}}}",
+                send_not_string = [f"\\multirow{{{numrows}}}{{*}}{{\\qty{{{send_notify:.2f}}}{{\\second}}}} & \\multirow{{{numrows}}}{{*}}{{\\qty{{{recv_getnotify:.2f}}}{{\\second}}}}",
                                     " & "," & "," & "," & "," & ",]
-                recv_not_string = [f"\\multirow{{6}}{{*}}{{\\qty{{{recv_notify:.2f}}}{{\\second}}}} & \\multirow{{6}}{{*}}{{\\qty{{{send_getnotify:.2f}}}{{\\second}}}}",
+                recv_not_string = [f"\\multirow{{{numrows}}}{{*}}{{\\qty{{{recv_notify:.2f}}}{{\\second}}}} & \\multirow{{{numrows}}}{{*}}{{\\qty{{{send_getnotify:.2f}}}{{\\second}}}}",
                                    " & "," & "," & "," & "," & ",]
                 ctr = 0
                 for rate in unique_rates:
@@ -87,6 +103,7 @@ def process_rt_csvs(input_file, output_file):
                     # if rate != unique_rates[-1]:
                     #     out += "\\addlinespace\n"
                 f.write(f"{out}\\midrule\n")
+            f.write("\\end{tabularx}\n}")
     
             
 # Example usage: python sum_columns_to_txt.py input output
