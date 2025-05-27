@@ -100,6 +100,7 @@ It takes as input a JSON file that specidies the benchmarks to run.
   ```
 to start the server components (as a background service), followed by the benchmark driver.
 Please note (when not using the make command), that the server components need to be up and running before the benchmark driver can be started.
+
 3. **Wait for the benchmarks to finish**. The client container will stop running once it finished the calculations or if an error occured. Check the container logs for this `podman logs -f bench`. 
 
 4. Once the client container stopped, remove all benchmarking containers using the command 
@@ -119,7 +120,7 @@ make rm
 ### 6. Evaluate Results
 
 The folder `eval` contains Python scripts to process the benchmarking results and to generate the tables displayed in our paper.
-These scripts reqiure `numpy, pandas`. We recommend the use of a virtual environment to install these.
+These scripts require `numpy, pandas`. We recommend the use of a virtual environment to install these.
 To do so run the following commands from the repository root:
 
 ```shell

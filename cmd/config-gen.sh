@@ -2,7 +2,7 @@
 
 # Read input 
 #read -p "IP Address: " IP
-read -p "Num. threads for multi client exeriment: " THREADS
+read -p "Number of threads for multi-client experiments: " THREADS
 #read -p "Config File Name (saved in $PWD/app/benchmarks/<NAME>.json) : " NAME
 # Can be "F" = full benchmarks, "S" = small DB size benchmarks with low number of repetitions
 #read -p 'Which benchmark configs to create "f" (full) or "s" (small for testing): ' BENCH
@@ -18,8 +18,6 @@ BENCHs="f s t"
 
 
 for BENCH in $BENCHs; do
-
-
     if [ "$BENCH" = "f" ]; then
         RATEs="1 5 10"
         DBEXPs="10 12 14 16 18"
