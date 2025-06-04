@@ -2,6 +2,8 @@
 
 This is a prototype implementation of Sabot, a strongly anonymous bootstrapping protocol with bandwith-efficiency. 
 
+Check out our [paper](https://eprint.iacr.org/2025/971) (to be published at ACM CCS 2025) for details.
+
 
 > :warning: **Disclaimer**: This code is provided as an experimental implementation for testing purposes and should not be used in a productive environment. We cannot guarantee security and correctness.
 
